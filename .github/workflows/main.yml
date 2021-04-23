@@ -1,0 +1,35 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Run test matrix
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      max-parallel: 4
+      matrix:
+        node-version: [8, 10, 12, 13]
+        mongodb-version: [4.0, 4.2]
+        redis-version: [4, 5, 5.0.12, 6, 6.0.12, 6.2, 6.2.1, 6.2.2, 6.0.11, 5.0.11, 6.0.8, 6.0.7, 6.0.6, 6.0.5, 6.0.4]
+    timeout-minutes: 300
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v1
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+        
+    - name: Sleep for 68 seconds
+      uses: whatnick/wait-action@master
+      with:
+        time: '1m'       
+        
+    - name: Build
+      uses: docker/build-push-action@v1
+      with:
+        push: false
