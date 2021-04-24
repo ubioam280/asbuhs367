@@ -13,7 +13,7 @@ jobs:
       matrix:
         node-version: [8, 10, 12, 13]
         mongodb-version: [4.0, 4.2]
-        redis-version: [4, 5, 5.0.12, 6, 6.0.12, 6.2, 6.2.1, 6.2.2, 6.0.11, 5.0.11, 6.0.8, 6.0.7, 6.0.6, 6.0.5, 6.0.4]
+        redis-version: [4, 5, 6]
     timeout-minutes: 300
     steps:
     - name: Git checkout
